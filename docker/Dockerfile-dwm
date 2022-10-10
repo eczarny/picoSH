@@ -1,0 +1,21 @@
+#
+# picoSH build environment
+#
+
+FROM eczarny/picosh-base
+
+# dwm dependencies
+RUN DEBIAN_FRONTEND=noninteractive TZ=America/New_York apt-get -y install libxft-dev:armhf >/dev/null
+
+# Set the docker user
+USER docker
+
+# Build environment variables
+ENV VERSION=6.3
+ENV SRC=$PICOSH_STAGING/src-dwm-${VERSION}
+
+# Prepare the build environment
+RUN mkdir -p $SRC
+
+# Download dwm
+RUN git clone --depth 1 --branch $VERSION git://git.suckless.org/dwm $SRC

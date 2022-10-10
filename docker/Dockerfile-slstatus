@@ -1,0 +1,21 @@
+#
+# picoSH build environment
+#
+
+FROM eczarny/picosh-base
+
+# dwm dependencies
+RUN apt-get -y install libx11-dev:armhf >/dev/null
+
+# Set the docker user
+USER docker
+
+# Build environment variables
+ENV VERSION=master
+ENV SRC=$PICOSH_STAGING/src-slstatus-${VERSION}
+
+# Prepare the build environment
+RUN mkdir -p $SRC
+
+# Download slstatus
+RUN git clone --depth 1 --branch $VERSION git://git.suckless.org/slstatus $SRC

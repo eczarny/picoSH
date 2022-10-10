@@ -1,0 +1,40 @@
+#
+# picoSH build environment
+#
+
+FROM ubuntu:focal
+
+# Configure armhf support
+RUN dpkg --add-architecture armhf >/dev/null
+ADD docker/src-base/sources.list /etc/apt/sources.list
+
+# Update Ubuntu
+RUN apt-get -y update && apt-get -y dist-upgrade >/dev/null
+
+# Configure the locale
+RUN apt-get -y install locales >/dev/null
+RUN locale-gen en_US.UTF-8 \
+ && update-locale LANG=en_US.UTF-8 LANGUAGE=en_US:en >/dev/null
+
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US:en
+ENV LC_ALL=en_US.UTF-8
+
+# Common dependencies
+RUN apt-get -y install bc bison build-essential flex gcc-arm-linux-gnueabihf git libx11-dev:armhf nano sudo u-boot-tools >/dev/null
+
+# Remove retrieved packages in the local APT repository
+RUN apt-get clean >/dev/null
+
+# Create the docker user
+RUN adduser --disabled-password --gecos '' docker \
+ && adduser docker sudo \
+ && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
+# Common build environment variables
+ENV PICOSH_HOME=/var/picosh-build
+ENV PICOSH_BUILD=$PICOSH_HOME/build
+ENV PICOSH_BUILD_LOG=$PICOSH_HOME/build/build.log
+ENV PICOSH_CONFIGS=$PICOSH_HOME/configs
+ENV PICOSH_PATCHES=$PICOSH_HOME/patches
+ENV PICOSH_STAGING=/tmp/picosh-staging

@@ -1,0 +1,21 @@
+#
+# picoSH build environment
+#
+
+FROM eczarny/picosh-base
+
+# Linux dependencies
+RUN apt-get -y install kmod libssl-dev >/dev/null
+
+# Set the docker user
+USER docker
+
+# Build environment variables
+ENV VERSION=v5.7
+ENV SRC=$PICOSH_STAGING/src-linux-${VERSION}
+
+# Prepare the build environment
+RUN mkdir -p $SRC
+
+# Download Linux
+RUN git clone --quiet --depth 1 --branch $VERSION https://github.com/torvalds/linux.git $SRC

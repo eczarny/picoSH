@@ -1,0 +1,7 @@
+#!/bin/bash
+
+PICOSH_BUILD=$PICOSH_HOME/build
+PICOSH_BUILD_LOG=$PICOSH_HOME/build/build.log
+PICOSH_CONFIGS=$PICOSH_HOME/configs
+PICOSH_PATCHES=$PICOSH_HOME/patches
+PICOSH_STAGING=/tmp/picosh-staging

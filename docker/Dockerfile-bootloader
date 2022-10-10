@@ -1,0 +1,21 @@
+#
+# picoSH build environment
+#
+
+FROM eczarny/picosh-base
+
+# Das U-Boot dependencies
+RUN apt-get -y install python3-dev swig >/dev/null
+
+# Set the docker user
+USER docker
+
+# Build environment variables
+ENV VERSION=v2020.10
+ENV SRC=$PICOSH_STAGING/src-u-boot-${VERSION}
+
+# Prepare the build environment
+RUN mkdir -p $SRC
+
+# Download Das U-Boot
+RUN git clone --quiet --depth 1 --branch $VERSION https://github.com/u-boot/u-boot.git $SRC

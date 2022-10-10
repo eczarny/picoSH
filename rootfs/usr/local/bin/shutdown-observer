@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -e
+
+while [[ $(pgrep "$1" &>/dev/null)$? -eq 0 ]]; do sleep 2; done && shutdown now
