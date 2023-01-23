@@ -11,6 +11,10 @@ The picoSH build process depends Docker, and a couple other dependencies needed 
 
 To make building picoSH easier you should use the included Vagrantfile.
 
+## Including PICO-8 in the picoSH image
+
+picoSH does not include a copy of PICO-8. To build picoSH place an unzipped copy of PICO-8 under `rootfs/home/picosh/pico-8`. The PICO-8 binary should reside at this path.
+
 ## Vagrant
 
 picoSH can be built using Vagrant on the host system. Make sure Vagrant and VirtualBox are installed and simply run:
