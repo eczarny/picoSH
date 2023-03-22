@@ -11,6 +11,9 @@ source $PICOSH_SCRIPTS/include/apply-patches.sh
 
 pushd $SRC
 
+# Checkout the pinned version
+git reset --hard $VERSION
+
 # Apply patches
 # echo "Applying patches"
 apply-patches $PICOSH_PATCHES/slstatus-${VERSION}

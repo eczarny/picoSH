@@ -11,11 +11,11 @@ RUN apt-get -y install libx11-dev:armhf >/dev/null
 USER docker
 
 # Build environment variables
-ENV VERSION=master
+ENV VERSION=3b699c1
 ENV SRC=$PICOSH_STAGING/src-slstatus-${VERSION}
 
 # Prepare the build environment
 RUN mkdir -p $SRC
 
 # Download slstatus
-RUN git clone --depth 1 --branch $VERSION git://git.suckless.org/slstatus $SRC
+RUN git clone git://git.suckless.org/slstatus $SRC
