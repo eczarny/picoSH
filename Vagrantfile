@@ -5,8 +5,7 @@ Vagrant.configure("2") do |config|
     v.memory = 4096
   end
 
-  config.vm.synced_folder ".", "/vagrant", type: "rsync",
-    rsync__exclude: ".git/"
+  config.vm.synced_folder ".", "/vagrant", type: "nfs"
 
   config.vm.provision :docker
 
